@@ -1,4 +1,4 @@
-(5 points): As a developer, I want to make good, consistent commits.
+<!-- (5 points): As a developer, I want to make good, consistent commits. -->
 
 <!-- (5 points): As a developer, I want to use the Create-React-App command to create my React project. -->
 

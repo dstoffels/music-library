@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container } from 'react-bootstrap';
+import { Container, Navbar } from 'react-bootstrap';
 
 import SongTable from './Components/SongTable/SongTable.jsx';
 
@@ -11,10 +11,17 @@ const App = () => {
 	const [criterion, setCriterion] = useState('');
 
 	return (
-		<Container>
-			<SearchBar criterion={criterion} setCriterion={setCriterion} />
-			<SongTable searchCriterion={criterion} />
-		</Container>
+		<>
+			<Navbar bg='light' sticky='top'>
+				<Container fluid>
+					<Navbar.Brand>slapSter</Navbar.Brand>
+					<SearchBar criterion={criterion} setCriterion={setCriterion} />
+				</Container>
+			</Navbar>
+			<Container>
+				<SongTable searchCriterion={criterion} />
+			</Container>
+		</>
 	);
 };
 

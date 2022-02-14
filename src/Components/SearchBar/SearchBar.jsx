@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FloatingLabel, Form } from 'react-bootstrap';
+import { Container, FloatingLabel, Form } from 'react-bootstrap';
 
 import './SearchBar.css';
 
@@ -9,7 +9,7 @@ const SearchBar = ({ criterion, setCriterion }) => {
 	}
 
 	return (
-		<>
+		<div className='searchbar mt-2 mb-2'>
 			<FloatingLabel label='Search'>
 				<Form.Control
 					type='text'
@@ -18,7 +18,7 @@ const SearchBar = ({ criterion, setCriterion }) => {
 					placeholder='Search'
 				/>
 			</FloatingLabel>
-		</>
+		</div>
 	);
 };
 

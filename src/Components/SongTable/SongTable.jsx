@@ -42,7 +42,7 @@ const SongTable = ({ searchCriterion }) => {
 
 	return (
 		<>
-			<Table>
+			<Table striped bordered hover>
 				<thead>
 					<tr>
 						<th>Title</th>
