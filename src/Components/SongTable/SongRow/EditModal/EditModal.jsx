@@ -15,7 +15,7 @@ const EditModal = ({ song, show, setShow, editSong }) => {
 	};
 
 	return (
-		<Modal show={show}>
+		<Modal onClick={e => e.stopPropagation()} show={show}>
 			<Modal.Header>
 				<Modal.Title>Editing {song.title}</Modal.Title>
 			</Modal.Header>

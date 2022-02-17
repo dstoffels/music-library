@@ -11,6 +11,7 @@ import SongRow from './SongRow/SongRow.jsx';
 import './SongTable.css';
 import NewSongModal from '../NewSongModal/NewSongModal.jsx';
 
+//TODO: implement sorting for each column
 const SongTable = ({ searchCriterion }) => {
 	const [allSongs, setAllSongs] = useState([]);
 	const [filteredSongs, setFilteredSongs] = useState([]);
