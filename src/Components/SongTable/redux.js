@@ -18,21 +18,8 @@ export function allSongs(state = [], action = {}) {
 
 export function filteredSongs(state = [], action = {}) {
 	switch (action.type) {
-		case GET:
-			return [...action.payload.data];
 		case SEARCH:
-			let { allSongs, criterion } = action.payload;
-			criterion = criterion.toLowerCase();
-			const searchResults = allSongs.filter(({ title, artist, album, genre, release_date }) => {
-				return (
-					title.toLowerCase().includes(criterion) ||
-					artist.toLowerCase().includes(criterion) ||
-					album.toLowerCase().includes(criterion) ||
-					genre.toLowerCase().includes(criterion) ||
-					release_date.toLowerCase().includes(criterion)
-				);
-			});
-			return [...searchResults];
+			return [...action.payload];
 		default:
 			return state;
 	}
@@ -41,10 +28,25 @@ export function filteredSongs(state = [], action = {}) {
 // ACTION CREATORS
 
 export function getAllSongs() {
-	const response = axios.get('http://127.0.0.1:8000/music/');
+	const response = axios.get(endpoint());
 	return { type: GET, payload: response };
 }
 
 export function filterSongs(allSongs = [], criterion = '') {
-	return { type: SEARCH, payload: { allSongs, criterion } };
+	criterion = criterion.toLowerCase();
+	const searchResults = allSongs.filter(({ title, artist, album, genre, release_date }) => {
+		return (
+			title.toLowerCase().includes(criterion) ||
+			artist.toLowerCase().includes(criterion) ||
+			album.toLowerCase().includes(criterion) ||
+			genre.toLowerCase().includes(criterion) ||
+			release_date.toLowerCase().includes(criterion)
+		);
+	});
+
+	return { type: SEARCH, payload: searchResults };
+}
+
+export function createSong(songData) {
+	axios.post(endpoint(), songData);
 }

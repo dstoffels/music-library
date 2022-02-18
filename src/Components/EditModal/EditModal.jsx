@@ -1,7 +1,7 @@
 import Button from '@mui/material/Button';
-import React, { useState } from 'react';
+import React from 'react';
 import { Modal } from 'react-bootstrap';
-import SongForm from '../../../SongForm/SongForm.jsx';
+import SongForm from '../SongForm/SongForm.jsx';
 
 const EditModal = ({ song, show, setShow, editSong }) => {
 	const handleClose = e => {

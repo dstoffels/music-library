@@ -2,25 +2,24 @@ import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-import DeleteModal from './DeleteModal/DeleteModal.jsx';
-import EditModal from './EditModal/EditModal.jsx';
+import DeleteModal from '../../DeleteModal/DeleteModal.jsx';
+import EditModal from '../../EditModal/EditModal.jsx';
 
 import './SongRow.css';
 
-const SongRow = ({ song, deleteSong, editSong }) => {
+const SongRow = ({ song, setSelectedSong, showEditModal, showDeleteModal }) => {
 	const { title, album, artist, genre, release_date } = song;
 
-	const [showDelete, setShowDelete] = useState(false);
-	const [showEdit, setShowEdit] = useState(false);
-
 	const handleShowDelete = e => {
-		setShowDelete(true);
 		e.stopPropagation();
+		setSelectedSong(song);
+		showDeleteModal();
 	};
 
 	const handleClick = e => {
 		e.stopPropagation();
-		setShowEdit(true);
+		showEditModal();
+		setSelectedSong(song);
 	};
 
 	return (
@@ -37,10 +36,15 @@ const SongRow = ({ song, deleteSong, editSong }) => {
 					</Button>
 				</td>
 			</tr>
-			<DeleteModal song={song} show={showDelete} setShow={setShowDelete} deleteSong={deleteSong} />
-			<EditModal song={song} show={showEdit} setShow={setShowEdit} editSong={editSong} />
 		</>
 	);
 };
 
-export default SongRow;
+// REDUX
+
+import { connect } from 'react-redux';
+import { setSelectedSong } from './redux.js';
+import { showEditModal } from '../../EditModal/redux.js';
+import { showDeleteModal } from '../../DeleteModal/redux.js';
+
+export default connect(null, { setSelectedSong, showEditModal, showDeleteModal })(SongRow);

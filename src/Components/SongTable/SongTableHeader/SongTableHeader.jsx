@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
-import NewSongModal from '../../NewSongModal/NewSongModal.jsx';
+import NewSongModal from '../../CreateModal/CreateModal.jsx';
 
 const SongTableHeader = ({ createSong }) => {
 	const [showNewModal, setShowNewModal] = useState(false);

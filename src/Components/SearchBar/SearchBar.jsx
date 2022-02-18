@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Container, FloatingLabel, Form } from 'react-bootstrap';
+import React from 'react';
+import { FloatingLabel, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { setSearchFilter } from './redux.js';
 
