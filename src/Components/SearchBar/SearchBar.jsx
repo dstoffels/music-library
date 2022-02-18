@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { Container, FloatingLabel, Form } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { setSearchFilter } from './redux.js';
 
 import './SearchBar.css';
 
-const SearchBar = ({ criterion, setCriterion }) => {
+const SearchBar = props => {
 	function handleCriterion(e) {
-		setCriterion(e.target.value);
+		props.setSearchFilter(e.target.value);
 	}
 
 	return (
@@ -13,7 +15,7 @@ const SearchBar = ({ criterion, setCriterion }) => {
 			<FloatingLabel label='Search'>
 				<Form.Control
 					type='text'
-					value={criterion}
+					value={props.searchFilter}
 					onChange={handleCriterion}
 					placeholder='Search'
 				/>
@@ -22,4 +24,8 @@ const SearchBar = ({ criterion, setCriterion }) => {
 	);
 };
 
-export default SearchBar;
+const mapStateToProps = state => {
+	return { searchFilter: state.searchFilter };
+};
+
+export default connect(mapStateToProps, { setSearchFilter })(SearchBar);
