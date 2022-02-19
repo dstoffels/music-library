@@ -1,15 +1,25 @@
 import Button from '@mui/material/Button';
-import React, { useState } from 'react';
+import React from 'react';
 import { Modal } from 'react-bootstrap';
 
-const DeleteModal = ({ deleteModal, selectedSong, deleteSong, hideDeleteModal }) => {
+const DeleteModal = ({
+	deleteModal,
+	selectedSong,
+	deleteSong,
+	hideDeleteModal,
+	clear,
+	getAllSongs,
+}) => {
 	const handleClose = e => {
 		e.stopPropagation();
+		clear();
 		hideDeleteModal();
 	};
+
 	const handleDelete = e => {
-		// e.stopPropagation()
+		e.preventDefault();
 		deleteSong(selectedSong.id);
+		getAllSongs();
 	};
 
 	return (
@@ -25,11 +35,20 @@ const DeleteModal = ({ deleteModal, selectedSong, deleteSong, hideDeleteModal })
 	);
 };
 
+// REDUX
+
 const mapStateToProps = state => {
 	return { deleteModal: state.deleteModal, selectedSong: state.selectedSong };
 };
 
 import { connect } from 'react-redux';
 import { deleteSong, hideDeleteModal } from './redux.js';
+import { clearSelectedSong } from '../SongTable/SongRow/redux.js';
+import { getAllSongs } from '../SongTable/redux.js';
 
-export default connect(mapStateToProps, { deleteSong, hideDeleteModal })(DeleteModal);
+export default connect(mapStateToProps, {
+	deleteSong,
+	hideDeleteModal,
+	clear: clearSelectedSong,
+	getAllSongs,
+})(DeleteModal);

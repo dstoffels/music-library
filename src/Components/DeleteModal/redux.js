@@ -30,6 +30,6 @@ export function hideDeleteModal() {
 }
 
 export function deleteSong(id) {
-	axios.delete(endpoint(), id);
+	axios.delete(endpoint(id));
 	return { type: DELETE };
 }

@@ -32,7 +32,7 @@ export function songForm(state = EMPTY_FORM, action = {}) {
 		case CLEAR:
 			return { ...EMPTY_FORM };
 		case SUBMIT_EDIT:
-			axios.put(endpoint(action.payload.id), state);
+			axios.put(endpoint(action.payload), state);
 			return { ...EMPTY_FORM };
 		case SUBMIT_NEW:
 			axios.post(endpoint(), state);
@@ -43,8 +43,8 @@ export function songForm(state = EMPTY_FORM, action = {}) {
 }
 
 // ACTION CREATORS
-export function populateForm(values) {
-	return { type: EDIT, payload: values };
+export function populateForm(song) {
+	return { type: EDIT, payload: song };
 }
 
 export function setSongForm(kvp) {
@@ -55,8 +55,8 @@ export function clearForm() {
 	return { type: CLEAR };
 }
 
-export function updateSong() {
-	return { type: SUBMIT_EDIT };
+export function updateSong(id) {
+	return { type: SUBMIT_EDIT, payload: id };
 }
 
 export function createSong() {

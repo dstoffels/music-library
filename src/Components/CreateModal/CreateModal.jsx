@@ -3,15 +3,17 @@ import React, { useState } from 'react';
 import { Modal } from 'react-bootstrap';
 import SongForm from '../SongForm/SongForm.jsx';
 
-const NewSongModal = ({ show, setShow, createSong }) => {
+const CreateModal = ({ show, hide, clearForm, createSong, getAllSongs }) => {
 	const handleClose = e => {
-		e.stopPropagation();
-		setShow(false);
+		clearForm();
+		hide();
 	};
 
-	const saveSong = songData => {
-		createSong(songData);
-		setShow(false);
+	const saveSong = e => {
+		e.preventDefault();
+		createSong();
+		handleClose();
+		getAllSongs();
 	};
 
 	return (
@@ -20,10 +22,10 @@ const NewSongModal = ({ show, setShow, createSong }) => {
 				<Modal.Title>Add Song</Modal.Title>
 			</Modal.Header>
 			<Modal.Body>
-				<SongForm saveSong={saveSong} />
+				<SongForm id='new-song-form' handleSubmit={saveSong} />
 			</Modal.Body>
 			<Modal.Footer>
-				<Button form='edit-form' type='submit'>
+				<Button form='new-song-form' type='submit'>
 					Save Changes
 				</Button>
 				<Button color='error' onClick={handleClose}>
@@ -34,4 +36,20 @@ const NewSongModal = ({ show, setShow, createSong }) => {
 	);
 };
 
-export default NewSongModal;
+// REDUX
+
+import { connect } from 'react-redux';
+import { hideCreateModal } from './redux.js';
+import { clearForm, createSong } from '../SongForm/redux.js';
+import { getAllSongs } from '../SongTable/redux.js';
+
+const mapStateToProps = state => {
+	return { show: state.createModal };
+};
+
+export default connect(mapStateToProps, {
+	hide: hideCreateModal,
+	clearForm,
+	createSong,
+	getAllSongs,
+})(CreateModal);

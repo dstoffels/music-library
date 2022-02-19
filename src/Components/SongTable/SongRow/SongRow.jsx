@@ -1,25 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
-
-import DeleteModal from '../../DeleteModal/DeleteModal.jsx';
-import EditModal from '../../EditModal/EditModal.jsx';
 
 import './SongRow.css';
 
 const SongRow = ({ song, setSelectedSong, showEditModal, showDeleteModal }) => {
 	const { title, album, artist, genre, release_date } = song;
 
-	const handleShowDelete = e => {
+	const handleClick = e => {
+		e.stopPropagation();
+		setSelectedSong(song);
+		showEditModal();
+	};
+
+	const handleDeleteModal = e => {
 		e.stopPropagation();
 		setSelectedSong(song);
 		showDeleteModal();
-	};
-
-	const handleClick = e => {
-		e.stopPropagation();
-		showEditModal();
-		setSelectedSong(song);
 	};
 
 	return (
@@ -31,7 +28,7 @@ const SongRow = ({ song, setSelectedSong, showEditModal, showDeleteModal }) => {
 				<td>{genre}</td>
 				<td>{release_date}</td>
 				<td>
-					<Button color='error' onClick={handleShowDelete}>
+					<Button color='error' onClick={handleDeleteModal}>
 						<DeleteIcon />
 					</Button>
 				</td>

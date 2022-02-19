@@ -1,23 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import TextField from '@mui/material/TextField';
 
-const SongForm = props => {
-	const handleSubmit = e => {
-		e.preventDefault();
-		saveSong(songData, song.id);
-	};
+const SongForm = ({ id, songForm, setSongForm, handleSubmit }) => {
+	const { title, artist, album, genre, release_date } = songForm;
 
 	return (
-		<form id='edit-form' onSubmit={handleSubmit}>
+		<form id={id} onSubmit={handleSubmit}>
 			<TextField
 				className='mb-3'
 				size='small'
 				fullWidth
-				value={props.songForm.title}
+				value={title}
 				onChange={e => {
-					props.setSongForm({ title: e.target.value });
+					setSongForm({ title: e.target.value });
 				}}
 				label='Title'
 				variant='outlined'
@@ -26,9 +23,9 @@ const SongForm = props => {
 				className='mb-3'
 				size='small'
 				fullWidth
-				value={props.songForm.artist}
+				value={artist}
 				onChange={e => {
-					props.setSongForm({ artist: e.target.value });
+					setSongForm({ artist: e.target.value });
 				}}
 				label='Artist'
 				variant='outlined'
@@ -37,9 +34,9 @@ const SongForm = props => {
 				className='mb-3'
 				size='small'
 				fullWidth
-				value={props.songForm.album}
+				value={album}
 				onChange={e => {
-					props.setSongForm({ album: e.target.value });
+					setSongForm({ album: e.target.value });
 				}}
 				label='Album'
 				variant='outlined'
@@ -48,9 +45,9 @@ const SongForm = props => {
 				className='mb-3'
 				size='small'
 				fullWidth
-				value={props.songForm.genre}
+				value={genre}
 				onChange={e => {
-					props.setSongForm({ genre: e.target.value });
+					setSongForm({ genre: e.target.value });
 				}}
 				label='Genre'
 				variant='outlined'
@@ -59,9 +56,9 @@ const SongForm = props => {
 				className='mb-3'
 				size='small'
 				fullWidth
-				value={props.songForm.release_date}
+				value={release_date}
 				onChange={e => {
-					props.setSongForm({ release_date: e.target.value });
+					setSongForm({ release_date: e.target.value });
 				}}
 				label='Release Date'
 				variant='outlined'
@@ -71,9 +68,12 @@ const SongForm = props => {
 	);
 };
 
-const mapStateToProps = state => {
-	return { songForm: state.songForm };
-};
-import { setSongForm } from './redux.js';
+// REDUX
 
-export default connect(mapStateToProps, { setSongForm })(SongForm);
+import { setSongForm, clearForm, updateSong, createSong } from './redux.js';
+
+const mapStateToProps = state => {
+	return { songForm: state.songForm, song: state.selectedSong, editModal: state.editModal };
+};
+
+export default connect(mapStateToProps, { setSongForm, clearForm })(SongForm);

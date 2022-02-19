@@ -44,7 +44,7 @@ export function filterSongs(allSongs = [], criterion = '') {
 		);
 	});
 
-	return { type: SEARCH, payload: searchResults };
+	return { type: SEARCH, payload: [...searchResults] };
 }
 
 export function createSong(songData) {

@@ -1,10 +1,8 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 import { Table } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { endpoint } from '../../API.js';
-import { getAllSongs, filterSongs, allSongs } from './redux.js';
 import SongRow from './SongRow/SongRow.jsx';
 
 import './SongTable.css';
@@ -21,30 +19,19 @@ const SongTable = props => {
 		props.filterSongs(props.allSongs, props.searchFilter);
 	}, [props.allSongs, props.searchFilter]);
 
-	async function createSong(songData) {
-		await axios.post(endpoint(), songData);
-		refreshSongs();
-	}
-
-	// async function editSong(songData, id) {
-	// 	await axios.put(endpoint(id), songData);
-	// 	refreshSongs();
-	// }
-
-	// async function deleteSong(id) {
-	// 	await axios.delete(endpoint(id));
-	// 	refreshSongs();
-	// }
-
 	const songRows = props.filteredSongs.map(song => <SongRow key={song.id} song={song} />);
 
 	return (
 		<Table striped hover>
-			<SongTableHeader createSong={createSong} />
+			<SongTableHeader />
 			<tbody>{songRows}</tbody>
 		</Table>
 	);
 };
+
+// REDUX
+
+import { getAllSongs, filterSongs } from './redux.js';
 
 const mapStateToProps = state => {
 	return {

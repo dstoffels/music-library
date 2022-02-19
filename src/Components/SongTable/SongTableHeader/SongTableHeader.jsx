@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import AddIcon from '@mui/icons-material/Add';
 import Button from '@mui/material/Button';
@@ -7,12 +7,10 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 import NewSongModal from '../../CreateModal/CreateModal.jsx';
 
-const SongTableHeader = ({ createSong }) => {
-	const [showNewModal, setShowNewModal] = useState(false);
-
+const SongTableHeader = ({ showCreateModal }) => {
 	return (
 		<>
-			<NewSongModal show={showNewModal} setShow={setShowNewModal} createSong={createSong} />
+			<NewSongModal />
 
 			<thead>
 				<tr>
@@ -27,7 +25,7 @@ const SongTableHeader = ({ createSong }) => {
 					<th>
 						<Button
 							onClick={() => {
-								setShowNewModal(true);
+								showCreateModal();
 							}}
 							variant='outlined'>
 							<AddIcon />
@@ -39,4 +37,9 @@ const SongTableHeader = ({ createSong }) => {
 	);
 };
 
-export default SongTableHeader;
+// REDUX
+
+import { connect } from 'react-redux';
+import { showCreateModal } from '../../CreateModal/redux.js';
+
+export default connect(null, { showCreateModal })(SongTableHeader);

@@ -19,6 +19,7 @@ export function editModal(state = false, action = {}) {
 export function showEditModal() {
 	return { type: SHOW };
 }
+
 export function hideEditModal() {
 	return { type: HIDE };
 }
