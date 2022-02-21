@@ -42,10 +42,10 @@ export function getAllSongs() {
 	};
 }
 
-export function sortSongs(songs = []) {
+export function sortSongs(songs) {
 	return (dispatch, getState) => {
 		const { sorting, filteredSongs } = getState();
-		songs = songs.length ? songs : [...filteredSongs];
+		songs = songs ? songs : [...filteredSongs];
 
 		songs.sort((a, b) => {
 			return sorting.ascending
