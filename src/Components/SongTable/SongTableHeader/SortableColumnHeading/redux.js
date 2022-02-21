@@ -4,7 +4,7 @@ import { sortSongs } from '../../redux.js';
 const UPDATE = '/SongTableHeader/UPDATE_SORTING';
 
 // REDUCERS
-const DEFAULT_STATE = { column: 'release_date', ascending: true };
+const DEFAULT_STATE = { column: 'title', ascending: true };
 export function sorting(state = DEFAULT_STATE, action = {}) {
 	switch (action.type) {
 		case UPDATE:

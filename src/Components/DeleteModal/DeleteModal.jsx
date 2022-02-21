@@ -25,13 +25,12 @@ const DeleteModal = ({ show, closeDeleteModal, deleteSong }) => {
 };
 
 // REDUX
+import { connect } from 'react-redux';
+import { deleteSong, closeDeleteModal } from './redux.js';
 
 const mapStateToProps = state => {
 	return { show: state.deleteModal };
 };
-
-import { connect } from 'react-redux';
-import { deleteSong, closeDeleteModal } from './redux.js';
 
 export default connect(mapStateToProps, {
 	deleteSong,

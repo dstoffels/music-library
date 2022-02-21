@@ -10,7 +10,7 @@ import SongTableHeader from './SongTableHeader/SongTableHeader.jsx';
 
 //TODO: implement sorting for each column
 
-const SongLibrary = ({ filteredSongs, filterSongs, allSongs, searchFilter, getAllSongs }) => {
+const SongTable = ({ filteredSongs, filterSongs, allSongs, searchFilter, getAllSongs }) => {
 	useEffect(() => {
 		getAllSongs();
 	}, []);
@@ -41,4 +41,4 @@ const mapStateToProps = state => {
 	};
 };
 
-export default connect(mapStateToProps, { getAllSongs, filterSongs })(SongLibrary);
+export default connect(mapStateToProps, { getAllSongs, filterSongs })(SongTable);

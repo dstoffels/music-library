@@ -1,9 +1,9 @@
 import React from 'react';
 import { Container, Navbar } from 'react-bootstrap';
-import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
+import Fab from '@mui/material/Fab';
 
-import SongTable from './Components/SongTable/SongLibrary.jsx';
+import SongTable from './Components/SongTable/SongTable.jsx';
 import SearchBar from './Components/SearchBar/SearchBar.jsx';
 import DeleteModal from './Components/DeleteModal/DeleteModal.jsx';
 import EditModal from './Components/EditModal/EditModal.jsx';
@@ -23,9 +23,9 @@ const App = ({ openCreateModal }) => {
 				<Container>
 					<Navbar.Brand>slapSter</Navbar.Brand>
 					<SearchBar />
-					<Button onClick={openCreateModal} variant='outlined'>
+					<Fab color='primary' onClick={openCreateModal}>
 						<AddIcon />
-					</Button>
+					</Fab>
 				</Container>
 			</Navbar>
 			<Container>
