@@ -36,7 +36,6 @@ function hideEditModal() {
 // THUNKS
 export function editSong(song) {
 	return (dispatch, getState) => {
-		dispatch(closeSnackbar());
 		dispatch(populateForm(song));
 		dispatch(showEditModal());
 	};
