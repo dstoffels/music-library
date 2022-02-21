@@ -9,6 +9,7 @@ import { editModal } from '../Components/EditModal/redux.js';
 import { deleteModal } from '../Components/DeleteModal/redux.js';
 import { createModal } from '../Components/CreateModal/redux.js';
 import { sorting } from '../Components/SongTable/SongTableHeader/SortableColumnHeading/redux.js';
+import { displaySnackbar, snackbarMessage } from '../Components/MsgSnackbar/redux.js';
 
 // REDUCERS
 const rootreducer = combineReducers({
@@ -20,6 +21,8 @@ const rootreducer = combineReducers({
 	deleteModal,
 	createModal,
 	sorting,
+	displaySnackbar,
+	snackbarMessage,
 });
 
 // DEVTOOLS

@@ -1,5 +1,10 @@
 import axios from 'axios';
+import React from 'react';
+
 import { endpoint } from '../../API.js';
+import { createSong } from '../CreateModal/redux.js';
+import { openSnackbar } from '../MsgSnackbar/redux.js';
+import SnackbarAction from '../MsgSnackbar/SnackbarAction/SnackbarAction.jsx';
 import { clearForm, populateForm } from '../SongForm/redux.js';
 import { getAllSongs } from '../SongTable/redux.js';
 
@@ -41,16 +46,22 @@ export function openDeleteModal(song) {
 
 export function closeDeleteModal() {
 	return dispatch => {
-		dispatch(clearForm());
+		// dispatch(clearForm());
 		dispatch(hideDeleteModal());
 	};
 }
 
 export function deleteSong() {
-	return async function thunk(dispatch, getState) {
-		const id = getState().songForm.id;
-		await axios.delete(endpoint(id));
+	return async (dispatch, getState) => {
+		const song = getState().songForm;
+		await axios.delete(endpoint(song.id));
 		dispatch(getAllSongs());
 		dispatch(closeDeleteModal());
+		dispatch(
+			openSnackbar(
+				`Deleted ${song.title}`,
+				<SnackbarAction title='UNDO' onClick={() => dispatch(createSong(song))} />,
+			),
+		);
 	};
 }

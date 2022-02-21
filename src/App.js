@@ -18,6 +18,7 @@ const App = ({ openCreateModal }) => {
 			<DeleteModal />
 			<EditModal />
 			<CreateModal />
+			<MsgSnackbar />
 
 			<Navbar bg='light' sticky='top'>
 				<Container>
@@ -38,5 +39,6 @@ const App = ({ openCreateModal }) => {
 // REDUX
 import { connect } from 'react-redux';
 import { openCreateModal } from './Components/CreateModal/redux.js';
+import MsgSnackbar from './Components/MsgSnackbar/MsgSnackbar.jsx';
 
 export default connect(null, { openCreateModal })(App);
