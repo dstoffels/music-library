@@ -3,8 +3,6 @@ import axios from 'axios';
 
 import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
-import Button from '@mui/material/Button';
-import DeleteIcon from '@mui/icons-material/Delete';
 import Badge from '@mui/material/Badge';
 import PlayCircleFilledOutlinedIcon from '@mui/icons-material/PlayCircleFilledOutlined';
 
@@ -24,11 +22,6 @@ const SongRow = ({ song, editSong, openDeleteModal }) => {
 		dispatch(getAllSongs());
 	};
 
-	const handleDeleteModal = e => {
-		e.stopPropagation();
-		openDeleteModal(song);
-	};
-
 	return (
 		<>
 			<TableRow hover onClick={handleClick} className='song-row'>
@@ -42,11 +35,6 @@ const SongRow = ({ song, editSong, openDeleteModal }) => {
 				<TableCell>{album}</TableCell>
 				<TableCell>{genre}</TableCell>
 				<TableCell>{release_date}</TableCell>
-				<TableCell>
-					<Button color='error' onClick={handleDeleteModal}>
-						<DeleteIcon />
-					</Button>
-				</TableCell>
 			</TableRow>
 		</>
 	);
@@ -56,8 +44,7 @@ const SongRow = ({ song, editSong, openDeleteModal }) => {
 
 import { connect, useDispatch } from 'react-redux';
 import { editSong } from '../../EditModal/redux.js';
-import { openDeleteModal } from '../../DeleteModal/redux.js';
 import { endpoint } from '../../../API.js';
 import { getAllSongs } from '../redux.js';
 
-export default connect(null, { editSong, openDeleteModal })(SongRow);
+export default connect(null, { editSong })(SongRow);

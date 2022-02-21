@@ -12,9 +12,8 @@ const SongTableHeader = ({}) => {
 	return (
 		<TableHead>
 			<TableRow>
-				<TableCell></TableCell>
+				<TableCell className='table-heading'></TableCell>
 				{columns}
-				<TableCell></TableCell>
 			</TableRow>
 		</TableHead>
 	);

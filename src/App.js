@@ -15,12 +15,12 @@ import './App.css';
 const App = ({ openCreateModal }) => {
 	return (
 		<>
-			<DeleteModal />
 			<EditModal />
 			<CreateModal />
+			<DeleteModal />
 			<MsgSnackbar />
 
-			<Navbar bg='light' sticky='top'>
+			<Navbar className='navbar' bg='light' sticky='top'>
 				<Container>
 					<Navbar.Brand>slapSter</Navbar.Brand>
 					<SearchBar />
@@ -29,7 +29,7 @@ const App = ({ openCreateModal }) => {
 					</Fab>
 				</Container>
 			</Navbar>
-			<Container fluid>
+			<Container>
 				<SongTable />
 			</Container>
 		</>

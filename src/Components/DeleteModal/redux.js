@@ -3,6 +3,7 @@ import React from 'react';
 
 import { endpoint } from '../../API.js';
 import { createSong } from '../CreateModal/redux.js';
+import { closeEditModal } from '../EditModal/redux.js';
 import { openSnackbar } from '../MsgSnackbar/redux.js';
 import SnackbarAction from '../MsgSnackbar/SnackbarAction/SnackbarAction.jsx';
 import { clearForm, populateForm } from '../SongForm/redux.js';
@@ -37,8 +38,9 @@ function hideDeleteModal() {
 }
 
 // THUNKS
-export function openDeleteModal(song) {
-	return dispatch => {
+export function openDeleteModal() {
+	return (dispatch, getState) => {
+		const song = getState().songForm;
 		dispatch(populateForm(song));
 		dispatch(showDeleteModal());
 	};
@@ -46,7 +48,7 @@ export function openDeleteModal(song) {
 
 export function closeDeleteModal() {
 	return dispatch => {
-		// dispatch(clearForm());
+		dispatch(closeEditModal());
 		dispatch(hideDeleteModal());
 	};
 }

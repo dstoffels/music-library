@@ -1,9 +1,15 @@
 import Button from '@mui/material/Button';
 import React from 'react';
 import { Modal } from 'react-bootstrap';
+import DeleteIcon from '@mui/icons-material/Delete';
 import SongForm from '../SongForm/SongForm.jsx';
 
-const EditModal = ({ show, closeEditModal, updateSong }) => {
+const EditModal = ({ show, closeEditModal, updateSong, openDeleteModal }) => {
+	const handleDeleteModal = e => {
+		e.stopPropagation();
+		openDeleteModal();
+	};
+
 	return (
 		<Modal onClick={e => e.stopPropagation()} show={show}>
 			<Modal.Header>
@@ -13,6 +19,9 @@ const EditModal = ({ show, closeEditModal, updateSong }) => {
 				<SongForm id='edit-form' saveSong={updateSong} />
 			</Modal.Body>
 			<Modal.Footer>
+				<Button color='error' onClick={handleDeleteModal}>
+					<DeleteIcon />
+				</Button>
 				<Button form='edit-form' type='submit'>
 					Save Changes
 				</Button>
@@ -28,9 +37,10 @@ const EditModal = ({ show, closeEditModal, updateSong }) => {
 
 import { connect } from 'react-redux';
 import { closeEditModal, updateSong } from './redux.js';
+import { openDeleteModal } from '../DeleteModal/redux.js';
 
 const mapStateToProps = state => {
 	return { show: state.editModal };
 };
 
-export default connect(mapStateToProps, { closeEditModal, updateSong })(EditModal);
+export default connect(mapStateToProps, { closeEditModal, updateSong, openDeleteModal })(EditModal);

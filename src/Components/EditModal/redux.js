@@ -44,7 +44,6 @@ export function editSong(song) {
 export function closeEditModal() {
 	return (dispatch, getState) => {
 		dispatch(hideEditModal());
-		dispatch(clearForm());
 	};
 }
 

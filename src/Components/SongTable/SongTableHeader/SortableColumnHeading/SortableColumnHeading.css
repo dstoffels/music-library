@@ -1,7 +1,8 @@
 .table-heading {
+	background-color: lightgray !important;
 	cursor: pointer;
 }
 
 .table-heading:hover {
-	background-color: rgba(0, 0, 0, 0.04);
+	background-color: rgb(230, 230, 230) !important;
 }
