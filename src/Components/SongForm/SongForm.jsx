@@ -1,10 +1,16 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 
 import TextField from '@mui/material/TextField';
 
-const SongForm = ({ id, songForm, setSongForm, handleSubmit }) => {
+const SongForm = ({ id, songForm, setFormField, saveSong, clearForm }) => {
 	const { title, artist, album, genre, release_date } = songForm;
+
+	const handleSubmit = e => {
+		e.preventDefault();
+		saveSong(songForm);
+		clearForm();
+	};
 
 	return (
 		<form id={id} onSubmit={handleSubmit}>
@@ -14,7 +20,7 @@ const SongForm = ({ id, songForm, setSongForm, handleSubmit }) => {
 				fullWidth
 				value={title}
 				onChange={e => {
-					setSongForm({ title: e.target.value });
+					setFormField('title', e.target.value);
 				}}
 				label='Title'
 				variant='outlined'
@@ -25,7 +31,7 @@ const SongForm = ({ id, songForm, setSongForm, handleSubmit }) => {
 				fullWidth
 				value={artist}
 				onChange={e => {
-					setSongForm({ artist: e.target.value });
+					setFormField('artist', e.target.value);
 				}}
 				label='Artist'
 				variant='outlined'
@@ -36,7 +42,7 @@ const SongForm = ({ id, songForm, setSongForm, handleSubmit }) => {
 				fullWidth
 				value={album}
 				onChange={e => {
-					setSongForm({ album: e.target.value });
+					setFormField('album', e.target.value);
 				}}
 				label='Album'
 				variant='outlined'
@@ -47,7 +53,7 @@ const SongForm = ({ id, songForm, setSongForm, handleSubmit }) => {
 				fullWidth
 				value={genre}
 				onChange={e => {
-					setSongForm({ genre: e.target.value });
+					setFormField('genre', e.target.value);
 				}}
 				label='Genre'
 				variant='outlined'
@@ -58,7 +64,7 @@ const SongForm = ({ id, songForm, setSongForm, handleSubmit }) => {
 				fullWidth
 				value={release_date}
 				onChange={e => {
-					setSongForm({ release_date: e.target.value });
+					setFormField('release_date', e.target.value);
 				}}
 				label='Release Date'
 				variant='outlined'
@@ -70,10 +76,10 @@ const SongForm = ({ id, songForm, setSongForm, handleSubmit }) => {
 
 // REDUX
 
-import { setSongForm, clearForm, updateSong, createSong } from './redux.js';
+import { setFormField, clearForm } from './redux.js';
 
 const mapStateToProps = state => {
 	return { songForm: state.songForm, song: state.selectedSong, editModal: state.editModal };
 };
 
-export default connect(mapStateToProps, { setSongForm, clearForm })(SongForm);
+export default connect(mapStateToProps, { setFormField, clearForm })(SongForm);

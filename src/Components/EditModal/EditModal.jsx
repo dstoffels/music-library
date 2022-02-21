@@ -3,44 +3,20 @@ import React from 'react';
 import { Modal } from 'react-bootstrap';
 import SongForm from '../SongForm/SongForm.jsx';
 
-const EditModal = ({
-	show,
-	song,
-	hide,
-	clear,
-	clearForm,
-	updateSong,
-	setSongForm,
-	getAllSongs,
-}) => {
-	const handleClose = e => {
-		clearForm();
-		clear();
-		hide();
-	};
-
-	const handleSubmit = e => {
-		e.preventDefault();
-		updateSong(song.id);
-		handleClose();
-		getAllSongs();
-	};
-
-	setSongForm({ ...song });
-
+const EditModal = ({ show, closeEditModal, updateSong }) => {
 	return (
 		<Modal onClick={e => e.stopPropagation()} show={show}>
 			<Modal.Header>
-				<Modal.Title>EDIT: {song.title}</Modal.Title>
+				<Modal.Title>EDIT SONG</Modal.Title>
 			</Modal.Header>
 			<Modal.Body>
-				<SongForm id='edit-form' handleSubmit={handleSubmit} />
+				<SongForm id='edit-form' saveSong={updateSong} />
 			</Modal.Body>
 			<Modal.Footer>
 				<Button form='edit-form' type='submit'>
 					Save Changes
 				</Button>
-				<Button color='error' onClick={handleClose}>
+				<Button color='error' onClick={closeEditModal}>
 					Cancel
 				</Button>
 			</Modal.Footer>
@@ -51,20 +27,10 @@ const EditModal = ({
 // REDUX
 
 import { connect } from 'react-redux';
-import { hideEditModal } from './redux.js';
-import { clearForm, setSongForm, updateSong } from '../SongForm/redux.js';
-import { clearSelectedSong } from '../SongTable/SongRow/redux.js';
-import { getAllSongs } from '../SongTable/redux.js';
+import { closeEditModal, updateSong } from './redux.js';
 
 const mapStateToProps = state => {
-	return { show: state.editModal, song: state.selectedSong };
+	return { show: state.editModal };
 };
 
-export default connect(mapStateToProps, {
-	hide: hideEditModal,
-	clear: clearSelectedSong,
-	updateSong,
-	clearForm,
-	setSongForm,
-	getAllSongs,
-})(EditModal);
+export default connect(mapStateToProps, { closeEditModal, updateSong })(EditModal);

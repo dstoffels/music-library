@@ -1,12 +1,7 @@
-import axios from 'axios';
-import { endpoint } from '../../API.js';
-
 // ACTION TYPES
 const EDIT = '/SongForm/EDIT';
 const SET = '/SongForm/SET';
 const CLEAR = '/SongForm/CLEAR';
-const SUBMIT_EDIT = '/SongForm/SUBMIT_EDIT';
-const SUBMIT_NEW = '/SongForm/SUBMIT_NEW';
 
 // DEFAULT STATE
 const date = new Date();
@@ -31,12 +26,6 @@ export function songForm(state = EMPTY_FORM, action = {}) {
 			return { ...state, ...action.payload };
 		case CLEAR:
 			return { ...EMPTY_FORM };
-		case SUBMIT_EDIT:
-			axios.put(endpoint(action.payload), state);
-			return { ...EMPTY_FORM };
-		case SUBMIT_NEW:
-			axios.post(endpoint(), state);
-			return { ...EMPTY_FORM };
 		default:
 			return state;
 	}
@@ -47,18 +36,10 @@ export function populateForm(song) {
 	return { type: EDIT, payload: song };
 }
 
-export function setSongForm(kvp) {
-	return { type: SET, payload: kvp };
+export function setFormField(key, value) {
+	return { type: SET, payload: { [key]: value } };
 }
 
 export function clearForm() {
 	return { type: CLEAR };
-}
-
-export function updateSong(id) {
-	return { type: SUBMIT_EDIT, payload: id };
-}
-
-export function createSong() {
-	return { type: SUBMIT_NEW };
 }

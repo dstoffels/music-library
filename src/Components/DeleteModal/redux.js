@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { endpoint } from '../../API.js';
+import { clearForm, populateForm } from '../SongForm/redux.js';
+import { getAllSongs } from '../SongTable/redux.js';
 
 // ACTION TYPES
 const SHOW = '/DeleteModal/SHOW';
@@ -22,14 +24,33 @@ export function deleteModal(state = false, action = {}) {
 }
 
 // ACTION CREATORS
-export function showDeleteModal() {
+function showDeleteModal() {
 	return { type: SHOW };
 }
-export function hideDeleteModal() {
+function hideDeleteModal() {
 	return { type: HIDE };
 }
 
-export function deleteSong(id) {
-	axios.delete(endpoint(id));
-	return { type: DELETE };
+// THUNKS
+export function openDeleteModal(song) {
+	return dispatch => {
+		dispatch(populateForm(song));
+		dispatch(showDeleteModal());
+	};
+}
+
+export function closeDeleteModal() {
+	return dispatch => {
+		dispatch(clearForm());
+		dispatch(hideDeleteModal());
+	};
+}
+
+export function deleteSong() {
+	return async function thunk(dispatch, getState) {
+		const id = getState().songForm.id;
+		await axios.delete(endpoint(id));
+		dispatch(getAllSongs());
+		dispatch(closeDeleteModal());
+	};
 }

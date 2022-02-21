@@ -2,29 +2,18 @@ import Button from '@mui/material/Button';
 import React from 'react';
 import { Modal } from 'react-bootstrap';
 
-const DeleteModal = ({
-	deleteModal,
-	selectedSong,
-	deleteSong,
-	hideDeleteModal,
-	clear,
-	getAllSongs,
-}) => {
+const DeleteModal = ({ show, closeDeleteModal, deleteSong }) => {
 	const handleClose = e => {
-		e.stopPropagation();
-		clear();
-		hideDeleteModal();
+		closeDeleteModal();
 	};
 
 	const handleDelete = e => {
-		e.preventDefault();
-		deleteSong(selectedSong.id);
-		getAllSongs();
+		deleteSong();
 	};
 
 	return (
-		<Modal show={deleteModal}>
-			<Modal.Header>Are you sure you want to delete {selectedSong.title}?</Modal.Header>
+		<Modal show={show}>
+			<Modal.Header>Are you sure you want to delete?</Modal.Header>
 			<Modal.Footer>
 				<Button onClick={handleDelete}>Yes</Button>
 				<Button color='error' onClick={handleClose}>
@@ -38,17 +27,13 @@ const DeleteModal = ({
 // REDUX
 
 const mapStateToProps = state => {
-	return { deleteModal: state.deleteModal, selectedSong: state.selectedSong };
+	return { show: state.deleteModal };
 };
 
 import { connect } from 'react-redux';
-import { deleteSong, hideDeleteModal } from './redux.js';
-import { clearSelectedSong } from '../SongTable/SongRow/redux.js';
-import { getAllSongs } from '../SongTable/redux.js';
+import { deleteSong, closeDeleteModal } from './redux.js';
 
 export default connect(mapStateToProps, {
 	deleteSong,
-	hideDeleteModal,
-	clear: clearSelectedSong,
-	getAllSongs,
+	closeDeleteModal,
 })(DeleteModal);
