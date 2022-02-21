@@ -1,5 +1,9 @@
 import axios from 'axios';
+import React from 'react';
+
 import { endpoint } from '../../API.js';
+import { closeSnackbar, openSnackbar } from '../MsgSnackbar/redux.js';
+import SnackbarAction from '../MsgSnackbar/SnackbarAction/SnackbarAction.jsx';
 import { clearForm, populateForm } from '../SongForm/redux.js';
 import { getAllSongs } from '../SongTable/redux.js';
 
@@ -32,23 +36,25 @@ function hideEditModal() {
 // THUNKS
 export function editSong(song) {
 	return (dispatch, getState) => {
-		dispatch(showEditModal());
+		dispatch(closeSnackbar());
 		dispatch(populateForm(song));
+		dispatch(showEditModal());
 	};
 }
 
 export function closeEditModal() {
 	return (dispatch, getState) => {
-		dispatch(clearForm());
 		dispatch(hideEditModal());
+		dispatch(clearForm());
 	};
 }
 
-export function updateSong(song) {
-	return async function thunk(dispatch, getState) {
+export function updateSong() {
+	return async (dispatch, getState) => {
+		const song = getState().songForm;
 		await axios.put(endpoint(song.id), song);
 		dispatch(getAllSongs());
-		dispatch(clearForm());
-		dispatch(hideEditModal());
+		dispatch(closeEditModal());
+		dispatch(openSnackbar(`Updated "${song.title}"`, <SnackbarAction />));
 	};
 }

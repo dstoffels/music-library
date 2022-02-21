@@ -8,7 +8,7 @@ const SongForm = ({ id, songForm, setFormField, saveSong, clearForm }) => {
 
 	const handleSubmit = e => {
 		e.preventDefault();
-		saveSong(songForm);
+		saveSong();
 		clearForm();
 	};
 

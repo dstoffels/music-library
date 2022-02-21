@@ -25,7 +25,7 @@ const INITIAL_STATE = { msg: '', actionComponent: <SnackbarAction /> };
 export function snackbarMessage(state = INITIAL_STATE, action = {}) {
 	switch (action.type) {
 		case SET:
-			return { ...action.payload };
+			return { ...state, ...action.payload };
 		case CLEAR:
 			return { ...INITIAL_STATE };
 		default:
@@ -49,6 +49,7 @@ function setMsg(msg, actionComponent) {
 // THUNKS
 export function openSnackbar(msg, actionComponent) {
 	return (dispatch, getState) => {
+		dispatch(hideMsgSnackbar());
 		dispatch(setMsg(msg, actionComponent));
 		dispatch(showMsgSnackbar());
 	};
@@ -57,6 +58,5 @@ export function openSnackbar(msg, actionComponent) {
 export function closeSnackbar() {
 	return (dispatch, getState) => {
 		dispatch(hideMsgSnackbar());
-		dispatch(clearForm());
 	};
 }

@@ -59,7 +59,7 @@ export function deleteSong() {
 		dispatch(closeDeleteModal());
 		dispatch(
 			openSnackbar(
-				`Deleted ${song.title}`,
+				`Deleted "${song.title}"`,
 				<SnackbarAction title='UNDO' onClick={() => dispatch(createSong(song))} />,
 			),
 		);

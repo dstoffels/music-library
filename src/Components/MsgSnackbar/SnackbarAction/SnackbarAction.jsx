@@ -6,18 +6,17 @@ import IconButton from '@mui/material/IconButton';
 
 const SnackbarAction = ({ title, onClick, closeSnackbar }) => {
 	const handleClick = () => {
-		onClick();
+		onClick ? onClick() : () => {};
 		closeSnackbar();
 	};
 
-	const action =
-		title && onClick ? (
-			<Button color='info' onClick={handleClick}>
-				{title}
-			</Button>
-		) : (
-			''
-		);
+	const action = title ? (
+		<Button color='info' onClick={handleClick}>
+			{title}
+		</Button>
+	) : (
+		''
+	);
 	return (
 		<>
 			{action}

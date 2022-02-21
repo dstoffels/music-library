@@ -1,5 +1,10 @@
 import axios from 'axios';
+import React from 'react';
+
 import { endpoint } from '../../API.js';
+import { deleteSong } from '../DeleteModal/redux.js';
+import { openSnackbar } from '../MsgSnackbar/redux.js';
+import SnackbarAction from '../MsgSnackbar/SnackbarAction/SnackbarAction.jsx';
 import { clearForm } from '../SongForm/redux.js';
 import { getAllSongs } from '../SongTable/redux.js';
 
@@ -43,10 +48,12 @@ export function closeCreateModal() {
 	};
 }
 
-export function createSong(song) {
-	return async dispatch => {
+export function createSong() {
+	return async (dispatch, getState) => {
+		const song = getState().songForm;
 		await axios.post(endpoint(), song);
 		dispatch(hideCreateModal());
 		dispatch(getAllSongs());
+		dispatch(openSnackbar(`Added "${song.title}"`, <SnackbarAction />));
 	};
 }
