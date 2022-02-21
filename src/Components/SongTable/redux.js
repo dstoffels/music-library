@@ -1,9 +1,6 @@
 import axios from 'axios';
-import React from 'react';
 
 import { endpoint } from '../../API.js';
-import { closeSnackbar, openSnackbar } from '../MsgSnackbar/redux.js';
-import SnackbarAction from '../MsgSnackbar/SnackbarAction/SnackbarAction.jsx';
 
 // ACTION TYPES
 const GET = '/SongLibrary/GET';
@@ -76,9 +73,5 @@ export function filterSongs() {
 			);
 		});
 		dispatch(sortSongs(searchResults));
-
-		searchResults.length
-			? dispatch(closeSnackbar())
-			: dispatch(openSnackbar('No results...', <SnackbarAction />));
 	};
 }
