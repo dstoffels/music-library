@@ -8,8 +8,7 @@ import { songForm } from '../Components/SongForm/redux.js';
 import { editModal } from '../Components/EditModal/redux.js';
 import { deleteModal } from '../Components/DeleteModal/redux.js';
 import { createModal } from '../Components/CreateModal/redux.js';
-import { selectedSong } from '../Components/SongTable/SongRow/redux.js';
-import { sorting } from '../Components/SongTable/SongTableHeader/redux.js';
+import { sorting } from '../Components/SongTable/SongTableHeader/SortableColumnHeading/redux.js';
 
 // REDUCERS
 const rootreducer = combineReducers({
@@ -20,7 +19,6 @@ const rootreducer = combineReducers({
 	editModal,
 	deleteModal,
 	createModal,
-	selectedSong,
 	sorting,
 });
 

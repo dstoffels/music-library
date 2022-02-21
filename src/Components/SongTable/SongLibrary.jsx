@@ -10,16 +10,16 @@ import SongTableHeader from './SongTableHeader/SongTableHeader.jsx';
 
 //TODO: implement sorting for each column
 
-const SongLibrary = props => {
+const SongLibrary = ({ filteredSongs, filterSongs, allSongs, searchFilter, getAllSongs }) => {
 	useEffect(() => {
-		props.getAllSongs();
+		getAllSongs();
 	}, []);
 
 	useEffect(() => {
-		props.filterSongs(props.allSongs, props.searchFilter);
-	}, [props.allSongs, props.searchFilter]);
+		filterSongs();
+	}, [allSongs, searchFilter]);
 
-	const songRows = props.filteredSongs.map(song => <SongRow key={song.id} song={song} />);
+	const songRows = filteredSongs.map(song => <SongRow key={song.id} song={song} />);
 
 	return (
 		<Table striped hover>

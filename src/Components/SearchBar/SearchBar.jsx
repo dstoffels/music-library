@@ -1,5 +1,5 @@
+import TextField from '@mui/material/TextField';
 import React from 'react';
-import { FloatingLabel, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { setSearchFilter } from './redux.js';
 
@@ -12,14 +12,13 @@ const SearchBar = props => {
 
 	return (
 		<div className='searchbar mt-2 mb-2'>
-			<FloatingLabel label='Search'>
-				<Form.Control
-					type='text'
-					value={props.searchFilter}
-					onChange={handleCriterion}
-					placeholder='Search'
-				/>
-			</FloatingLabel>
+			<TextField
+				fullWidth
+				size='small'
+				label='Search'
+				value={props.searchFilter}
+				onChange={handleCriterion}
+			/>
 		</div>
 	);
 };

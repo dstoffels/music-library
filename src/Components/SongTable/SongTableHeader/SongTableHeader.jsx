@@ -1,23 +1,17 @@
 import React from 'react';
 
 import Button from '@mui/material/Button';
-import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+
+import SortableColumnHeading from './SortableColumnHeading/SortableColumnHeading.jsx';
+
+const fields = ['title', 'artist', 'album', 'genre', 'release_date'];
 
 const SongTableHeader = ({}) => {
+	const columns = fields.map(field => <SortableColumnHeading key={field} column={field} />);
 	return (
 		<>
 			<thead>
-				<tr>
-					<th>
-						Title
-						<ArrowDropDownIcon />
-					</th>
-					<th>Artist</th>
-					<th>Album</th>
-					<th>Genre</th>
-					<th>Release Date</th>
-				</tr>
+				<tr>{columns}</tr>
 			</thead>
 		</>
 	);
