@@ -10,7 +10,7 @@ const SEARCH = '/SongLibrary/SEARCH';
 export function allSongs(state = [], action = {}) {
 	switch (action.type) {
 		case GET:
-			return [...action.payload.data];
+			return [...action.payload];
 		default:
 			return state;
 	}
@@ -26,27 +26,32 @@ export function filteredSongs(state = [], action = {}) {
 }
 
 // ACTION CREATORS
+function setAllSongs(songs) {
+	return { type: GET, payload: songs };
+}
 
+// THUNKS
 export function getAllSongs() {
-	const response = axios.get(endpoint());
-	return { type: GET, payload: response };
+	return async dispatch => {
+		const response = await axios.get(endpoint());
+		dispatch(setAllSongs(response.data));
+	};
 }
 
-export function filterSongs(allSongs = [], criterion = '') {
-	criterion = criterion.toLowerCase();
-	const searchResults = allSongs.filter(({ title, artist, album, genre, release_date }) => {
-		return (
-			title.toLowerCase().includes(criterion) ||
-			artist.toLowerCase().includes(criterion) ||
-			album.toLowerCase().includes(criterion) ||
-			genre.toLowerCase().includes(criterion) ||
-			release_date.toLowerCase().includes(criterion)
-		);
-	});
+export function filterSongs() {
+	return (dispatch, getState) => {
+		const { allSongs, searchFilter } = getState();
 
-	return { type: SEARCH, payload: [...searchResults] };
-}
-
-export function createSong(songData) {
-	axios.post(endpoint(), songData);
+		const criterion = searchFilter.toLowerCase();
+		const searchResults = allSongs.filter(({ title, artist, album, genre, release_date }) => {
+			return (
+				title.toLowerCase().includes(criterion) ||
+				artist.toLowerCase().includes(criterion) ||
+				album.toLowerCase().includes(criterion) ||
+				genre.toLowerCase().includes(criterion) ||
+				release_date.toLowerCase().includes(criterion)
+			);
+		});
+		dispatch({ type: SEARCH, payload: [...searchResults] });
+	};
 }

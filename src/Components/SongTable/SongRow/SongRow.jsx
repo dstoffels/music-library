@@ -23,7 +23,7 @@ const SongRow = ({ song, editSong, openDeleteModal }) => {
 				<td>{artist}</td>
 				<td>{album}</td>
 				<td>{genre}</td>
-				<td>{new Date(release_date).toLocaleDateString()}</td>
+				<td>{release_date}</td>
 				<td>
 					<Button color='error' onClick={handleDeleteModal}>
 						<DeleteIcon />

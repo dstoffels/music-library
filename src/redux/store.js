@@ -1,5 +1,6 @@
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import asyncActions from './Middlewares/asyncActions.js';
+import thunk from 'redux-thunk';
 
 import { allSongs, filteredSongs } from '../Components/SongTable/redux.js';
 import { searchFilter } from '../Components/SearchBar/redux.js';
@@ -8,7 +9,7 @@ import { editModal } from '../Components/EditModal/redux.js';
 import { deleteModal } from '../Components/DeleteModal/redux.js';
 import { createModal } from '../Components/CreateModal/redux.js';
 import { selectedSong } from '../Components/SongTable/SongRow/redux.js';
-import thunk from 'redux-thunk';
+import { sorting } from '../Components/SongTable/SongTableHeader/redux.js';
 
 // REDUCERS
 const rootreducer = combineReducers({
@@ -20,6 +21,7 @@ const rootreducer = combineReducers({
 	deleteModal,
 	createModal,
 	selectedSong,
+	sorting,
 });
 
 // DEVTOOLS
