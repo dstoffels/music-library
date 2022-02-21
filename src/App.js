@@ -29,7 +29,7 @@ const App = ({ openCreateModal }) => {
 					</Fab>
 				</Container>
 			</Navbar>
-			<Container>
+			<Container fluid>
 				<SongTable />
 			</Container>
 		</>

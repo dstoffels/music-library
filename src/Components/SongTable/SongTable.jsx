@@ -1,14 +1,14 @@
-import axios from 'axios';
 import React, { useEffect } from 'react';
 
-import { Table } from 'react-bootstrap';
+import Table from '@mui/material/Table';
 import { connect } from 'react-redux';
 import SongRow from './SongRow/SongRow.jsx';
 
 import './SongTable.css';
 import SongTableHeader from './SongTableHeader/SongTableHeader.jsx';
-
-//TODO: implement sorting for each column
+import TableContainer from '@mui/material/TableContainer';
+import TableBody from '@mui/material/TableBody';
+import Paper from '@mui/material/Paper';
 
 const SongTable = ({ filteredSongs, filterSongs, allSongs, searchFilter, getAllSongs }) => {
 	useEffect(() => {
@@ -22,10 +22,14 @@ const SongTable = ({ filteredSongs, filterSongs, allSongs, searchFilter, getAllS
 	const songRows = filteredSongs.map(song => <SongRow key={song.id} song={song} />);
 
 	return (
-		<Table striped hover>
-			<SongTableHeader />
-			<tbody>{songRows}</tbody>
-		</Table>
+		<Paper sx={{ width: '100%' }}>
+			<TableContainer sx={{ maxHeight: '90vh' }}>
+				<Table stickyHeader={true} aria-label='sticky table'>
+					<SongTableHeader />
+					<TableBody>{songRows}</TableBody>
+				</Table>
+			</TableContainer>
+		</Paper>
 	);
 };
 

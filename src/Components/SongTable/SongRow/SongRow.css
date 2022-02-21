@@ -1,8 +1,3 @@
 .song-row {
 	cursor: pointer !important;
 }
-
-.play-btn {
-	width: 0;
-	left: -50px;
-}

@@ -1,5 +1,6 @@
 import React from 'react';
 
+import TableCell from '@mui/material/TableCell';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
@@ -22,10 +23,10 @@ const SortableColumnHeading = ({ column, sorting, changeSortingColumn, toggleAsc
 		);
 
 	return (
-		<th className='table-heading' onClick={handleClick}>
+		<TableCell className='table-heading' onClick={handleClick}>
 			{split_and_capitalize(column)}
 			{sortIcon}
-		</th>
+		</TableCell>
 	);
 };
 
