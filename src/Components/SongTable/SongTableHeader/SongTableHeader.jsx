@@ -20,6 +20,4 @@ const SongTableHeader = ({}) => {
 	);
 };
 
-// REDUX
-
 export default SongTableHeader;

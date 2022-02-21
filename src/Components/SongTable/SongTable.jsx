@@ -24,7 +24,7 @@ const SongTable = ({ filteredSongs, filterSongs, allSongs, searchFilter, getAllS
 	return (
 		<Paper sx={{ width: '100%' }}>
 			<TableContainer sx={{ maxHeight: '90vh' }}>
-				<Table stickyHeader={true} aria-label='sticky table'>
+				<Table size='small' stickyHeader={true} aria-label='sticky table'>
 					<SongTableHeader />
 					<TableBody>{songRows}</TableBody>
 				</Table>
